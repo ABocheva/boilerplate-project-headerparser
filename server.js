@@ -20,13 +20,13 @@ app.get("/", function (req, res) {
 
 
 // your first API endpoint... 
-
 app.get('/api/whoami', function(req, res){
-var ipAdress = req.ip;  
+  var ip = req.ip;
+ var ipAddress = req.get('X-Forwarded-For').split(',')[0] || ip;
 var preferredLanguages = req.get('Accept-Language');
- var systemInformation = req.get('User-Agent'); 
-res.json({'ipaddress': ipAdress, 'language': preferredLanguages, 'software': systemInformation});  
-  
+var systemInformation = req.get('User-Agent'); 
+res.json({'ipaddress':ipAddress, 'language': preferredLanguages, 'software': systemInformation});  
+ 
 });
   
   
